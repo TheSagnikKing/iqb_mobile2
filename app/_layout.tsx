@@ -13,7 +13,10 @@ SplashScreen.preventAutoHideAsync();
 export default function RootLayout() {
   const colorScheme = useColorScheme();
   const [loaded] = useFonts({
-    SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
+    "font-regular": require('../assets/fonts/Montserrat-Regular.ttf'),
+    'font-medium': require('./../assets/fonts/Montserrat-Medium.ttf'),
+    'font-semibold': require('./../assets/fonts/Montserrat-SemiBold.ttf'),
+    'font-bold': require('./../assets/fonts/Montserrat-Bold.ttf'),
   });
 
   useEffect(() => {
@@ -30,7 +33,22 @@ export default function RootLayout() {
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
       <Stack>
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="+not-found" />
+        <Stack.Screen name="auth/signin" options={{ headerShown: false }} />
+        <Stack.Screen
+          name="home"
+          options={{
+            headerShown: false,
+          }} />
+        <Stack.Screen
+          name="singlejoin"
+          options={{
+            headerShown: false,
+          }} />
+        <Stack.Screen
+          name="singlejoinservices"
+          options={{
+            headerShown: false,
+          }} />
       </Stack>
     </ThemeProvider>
   );
