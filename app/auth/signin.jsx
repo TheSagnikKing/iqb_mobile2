@@ -2,8 +2,11 @@ import { StyleSheet, Text, View, Image, Pressable, TextInput, Switch } from 'rea
 import React, { useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { scale, verticalScale, moderateScale } from 'react-native-size-matters';
+import { useRouter } from 'expo-router';
 
 const Signin = () => {
+
+  const router = useRouter()
 
   const [rememberdatatrue, setRememberdatatrue] = useState(false)
 

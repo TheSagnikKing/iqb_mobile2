@@ -7,6 +7,7 @@ import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
 import Entypo from '@expo/vector-icons/Entypo';
 import Feather from '@expo/vector-icons/Feather';
 import { router } from 'expo-router';
+import { FontAwesome } from '@expo/vector-icons'
 
 const singlejoinservices = () => {
 
@@ -38,11 +39,11 @@ const singlejoinservices = () => {
     }
 
     const cancelServicesPressed = (item) => {
-        // setServicesArr((prev) => {
-        //     prev.map((previtem) => {
-        //         previtem.id !== item.id
-        //     })
-        // })
+        setServicesArr((prev) => {
+            return prev.filter((previtem) => (
+                previtem.id != item.id
+            ))
+        })
     }
 
     console.log(servicesArr)
@@ -58,7 +59,10 @@ const singlejoinservices = () => {
 
                     <FlatList
                         data={services}
-                        renderItem={({ item }) => <View style={styles.singlejoinservices_item}>
+                        renderItem={({ item }) => <View style={[
+                            styles.singlejoinservices_item,
+                            { borderColor: servicesArr.find((seritem) => seritem.id == item.id) ? Colors.borderBgColor2 : Colors.borderBgColor1 }
+                        ]}>
                             <View style={styles.singlejoinservices_item_top}>
                                 <View style={{ gap: verticalScale(10) }}>
                                     <Text style={{ fontFamily: "font-semibold", fontSize: moderateScale(14) }}>Hair Cut</Text>
@@ -70,9 +74,9 @@ const singlejoinservices = () => {
 
                                 {
                                     servicesArr.find((seritem) => seritem.id == item.id) ?
-                                        <Pressable style={{ height: moderateScale(32), width: moderateScale(32), backgroundColor: "red", borderRadius: 50, justifyContent: "center", alignItems: "center" }}
+                                        <Pressable style={{ height: moderateScale(32), width: moderateScale(32), backgroundColor: Colors.btnBgColor, borderRadius: 50, justifyContent: "center", alignItems: "center" }}
                                             onPress={() => cancelServicesPressed(item)}
-                                        ><FontAwesome6 name="add" size={18} color="#fff" /></Pressable> :
+                                        ><Feather name="check" size={20} color="#fff" /></Pressable> :
                                         <Pressable style={{ height: moderateScale(32), width: moderateScale(32), backgroundColor: Colors.bgColor, borderRadius: 50, justifyContent: "center", alignItems: "center" }}
                                             onPress={() => addServicesPressed(item)}
                                         ><FontAwesome6 name="add" size={18} color="#fff" /></Pressable>
@@ -119,7 +123,6 @@ const styles = StyleSheet.create({
     singlejoinservices_item: {
         height: verticalScale(156),
         borderWidth: 1,
-        borderColor: "#D2D2D2",
         borderRadius: moderateScale(8),
         paddingHorizontal: scale(10),
         backgroundColor: "#fff",
